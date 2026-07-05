@@ -12,6 +12,8 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { Feedback } from '@/components/feedback';
 import { LLMCopyButton, ViewOptions } from '@/components/page-actions';
 import { onRateAction } from '@/lib/github';
+import path from 'node:path';
+import { readFile } from 'node:fs/promises';
 
 // GitHub repository info for source links
 const owner = 'QuantumNous';
@@ -23,8 +25,12 @@ export default async function Page(props: {
 }) {
   const { slug, lang } = await props.params;
 
-  // Only allow index page and API Reference pages; block other routes
-  if (slug && slug[0] !== 'api') notFound();
+  // Only allow pages under modules configured in meta.json
+  if (slug) {
+    const metaPath = path.join(process.cwd(), 'content/docs', lang, 'meta.json');
+    const meta = JSON.parse(await readFile(metaPath, 'utf8'));
+    if (!meta.pages.includes(slug[0])) notFound();
+  }
 
   const page = source.getPage(slug, lang);
   if (!page) notFound();
@@ -79,8 +85,12 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { slug, lang } = await props.params;
 
-  // Only allow index page and API Reference pages; block other routes
-  if (slug && slug[0] !== 'api') notFound();
+  // Only allow pages under modules configured in meta.json
+  if (slug) {
+    const metaPath = path.join(process.cwd(), 'content/docs', lang, 'meta.json');
+    const meta = JSON.parse(await readFile(metaPath, 'utf8'));
+    if (!meta.pages.includes(slug[0])) notFound();
+  }
 
   const page = source.getPage(slug, lang);
   if (!page) notFound();
