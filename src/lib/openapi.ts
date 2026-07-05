@@ -39,7 +39,15 @@ export const openapi = createOpenAPI({
     const entries = await Promise.all(
       files.map(async (p) => {
         const raw = await readFile(p, 'utf8');
-        return [p, JSON.parse(raw)] as const;
+        const doc = JSON.parse(raw);
+        // Set API server URL for Playground if configured
+        if (process.env.API_SERVER_URL) {
+          doc.servers = [
+            { url: process.env.API_SERVER_URL },
+            { url: '/' },
+          ];
+        }
+        return [p, doc] as const;
       })
     );
     return Object.fromEntries(entries);
