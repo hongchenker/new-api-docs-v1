@@ -11,9 +11,9 @@ export function createMetadata(override: Metadata): Metadata {
     openGraph: {
       title: override.title ?? undefined,
       description: override.description ?? undefined,
-      url: 'https://www.newapi.ai',
+      url: 'https://realmai.cn',
       images: '/assets/logo.png',
-      siteName: 'New API',
+      siteName: 'RealmAI API',
       type: 'website',
       ...override.openGraph,
     },

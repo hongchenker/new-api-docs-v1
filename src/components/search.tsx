@@ -44,7 +44,7 @@ function Header() {
             target="_blank"
             rel="noreferrer noopener"
           >
-            New API
+            RealmAI API
           </a>
         </p>
       </div>

@@ -4,6 +4,7 @@ import { Hero } from './page.client';
 import { getLocalePath, i18n } from '@/lib/i18n';
 import Image from 'next/image';
 import { AntifraudDialog } from '@/components/antifraud-dialog';
+import { redirect } from 'next/navigation';
 
 const AtomGitIcon = () => (
   <svg role="img" viewBox="0 0 24 24" fill="currentColor" className="size-4">
@@ -85,6 +86,9 @@ export default async function Page({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+
+  redirect(getLocalePath(lang, 'docs/api'));
+
   const content = contentMap[lang] || contentMap.en;
 
   const partners = [

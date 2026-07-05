@@ -236,7 +236,7 @@ export function ViewOptions({
 
   return (
     <Popover>
-      <PopoverTrigger
+      {/*<PopoverTrigger
         className={cn(
           buttonVariants({
             color: 'secondary',
@@ -247,7 +247,7 @@ export function ViewOptions({
       >
         {t.open}
         <ChevronDown className="text-fd-muted-foreground size-3.5" />
-      </PopoverTrigger>
+      </PopoverTrigger>*/}
       <PopoverContent className="flex flex-col">
         {items.map((item) => (
           <a

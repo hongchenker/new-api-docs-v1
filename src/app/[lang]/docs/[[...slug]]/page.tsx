@@ -22,6 +22,10 @@ export default async function Page(props: {
   params: Promise<{ lang: string; slug?: string[] }>;
 }) {
   const { slug, lang } = await props.params;
+
+  // Only allow index page and API Reference pages; block other routes
+  if (slug && slug[0] !== 'api') notFound();
+
   const page = source.getPage(slug, lang);
   if (!page) notFound();
 
@@ -74,6 +78,10 @@ export async function generateMetadata(props: {
   params: Promise<{ lang: string; slug?: string[] }>;
 }): Promise<Metadata> {
   const { slug, lang } = await props.params;
+
+  // Only allow index page and API Reference pages; block other routes
+  if (slug && slug[0] !== 'api') notFound();
+
   const page = source.getPage(slug, lang);
   if (!page) notFound();
 

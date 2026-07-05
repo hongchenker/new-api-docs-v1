@@ -10,8 +10,9 @@ const config = {
     serverActions: {
       allowedOrigins: [
         'localhost:3000',
+        'docs.realmai.cn',  
         // newapi.pro domains
-        'docs.newapi.pro',
+        /*'docs.newapi.pro',
         'newapi.pro',
         'www.newapi.pro',
         // newapi.ai domains
@@ -19,7 +20,7 @@ const config = {
         'newapi.ai',
         'www.newapi.ai',
         // Vercel preview
-        'new-api-docs-v1.vercel.app',
+        'new-api-docs-v1.vercel.app',*/
       ],
     },
   },
