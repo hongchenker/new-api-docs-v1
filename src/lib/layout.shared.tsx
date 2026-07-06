@@ -3,6 +3,44 @@ import { i18n } from '@/lib/i18n';
 import Image from 'next/image';
 import type { LinkItemType } from 'fumadocs-ui/layouts/docs';
 
+const extraLinksI18n: Record<string, { productSite: string; tryNow: string }> = {
+  en: { productSite: 'Product Site', tryNow: 'Try Now' },
+  zh: { productSite: '产品站点', tryNow: '立即体验' },
+  ja: { productSite: '製品サイト', tryNow: '今すぐ体験' },
+};
+
+/**
+ * Extra nav links controlled by environment variables:
+ * - PRODUCT_SITE_URL: product site link
+ * - TRY_NOW_URL: try now link
+ */
+export function getExtraLinks(lang = 'zh'): LinkItemType[] {
+  const items: LinkItemType[] = [];
+  const productSiteUrl = process.env.PRODUCT_SITE_URL;
+  const tryNowUrl = process.env.TRY_NOW_URL;
+  const t = extraLinksI18n[lang] || extraLinksI18n.zh;
+
+  if (productSiteUrl) {
+    items.push({
+      type: 'main',
+      text: t.productSite,
+      url: productSiteUrl,
+      external: true,
+      on: 'nav',
+    });
+  }
+  if (tryNowUrl) {
+    items.push({
+      type: 'main',
+      text: t.tryNow,
+      url: tryNowUrl,
+      external: true,
+      on: 'nav',
+    });
+  }
+  return items;
+}
+
 export const linkItems: LinkItemType[] = [
   {
     type: 'icon',
