@@ -24,6 +24,16 @@ const config = {
       ],
     },
   },
+  async redirects() {
+    return [
+      {
+        source: '/:lang',
+        destination: '/:lang/docs',
+        permanent: true,
+        missing: [{ type: 'query', key: '_rsc' }],
+      },
+    ];
+  },
   async headers() {
     return [
       {

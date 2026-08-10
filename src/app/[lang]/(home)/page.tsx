@@ -87,8 +87,6 @@ export default async function Page({
 }) {
   const { lang } = await params;
 
-  redirect(getLocalePath(lang, 'docs'));
-
   const content = contentMap[lang] || contentMap.en;
 
   const partners = [
